@@ -1,0 +1,20 @@
+[project]
+name = "The-Scrumfather"
+version = "0.1.0"
+description = "i will make a so good tasks, that your only option is accept them"
+authors = [
+    {name = "mccartheney mendes",email = "mccartheney@hotmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai (>=0.114.0,<0.115.0)",
+    "langchain-openai (>=0.3.13,<0.4.0)"
+]
+
+[tool.poetry]
+package-mode=false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
