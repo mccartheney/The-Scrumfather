@@ -1,5 +1,3 @@
-## Final Answer
-
 **User Story 1: Create User Profile**
 
 * Design a user registration form with minimal required information.

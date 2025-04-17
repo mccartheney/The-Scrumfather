@@ -3,10 +3,7 @@ from src.llm import gemma2
 
 task_planner = Agent(
     role="Technical Task Planner",
-    goal="Create detailed technical tasks with focus on quality and maintainability",
-    backstory="""A detail-oriented engineer with expertise in agile project management.
-    Expert in technical task estimation and complexity assessment.
-    Specialized in code quality standards and best practices.
-    Strong experience in coordinating cross-functional teams and managing technical dependencies.""",
+    goal="Break down features into developer tasks and assign them to roles",
+    backstory="A detail-oriented engineer who ensures clear handoffs between roles.",
     llm=gemma2
 )
