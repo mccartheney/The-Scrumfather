@@ -1,26 +1,53 @@
-from crewai import Agent, Task, Crew
-import os
+from crewai import Crew
 
-os.environ['OPENAI_API_KEY'] = "lick my balls openAi"
+# import tasks
+from src.tasks.assign_user_stories_task import assing_user_stories_task
+from src.tasks.create_db_structure_task import db_structure_task
+from src.tasks.create_user_stories_task import user_stories_task
+from src.tasks.devops_task import devops_task
+from src.tasks.initial_task import initial_task
 
+# import agents
+from src.agents.architect_agent import architect
+from src.agents.db_designer_agent import db_designer
+from src.agents.devops_adviser_agent import devops_advisor
+from src.agents.product_manager_agent import product_manager
+from src.agents.task_planner_agent import task_planner
 
-# info_agent = Agent (
-#   role = "Product manager",
-#   goal="create tasks to make a project",
-#   backstory = "You make the best tasks in the world",
-#   llm=llama2
-# )
+# Define the project idea
+idea = 'a clone of instagram'
 
-task = Task(
-  description= f"create tasks for the development of the feature ''",
-  expected_output="all tasks and the time that each one takes to be finalized, and say if it is backend or front end",
-  agent= info_agent
+# Define team roles
+roles = ["Frontend Developer", "Backend Developer", "full stack"]
+
+# Define tasks structure
+task_to_create_system_arquitecture = initial_task(idea=idea, roles=roles)
+task_to_create_user_stories = user_stories_task(task_which_that_depends=task_to_create_system_arquitecture)
+task_to_create_db_strucure = db_structure_task(task_which_that_depends=task_to_create_user_stories)
+task_to_assign_user_stories = assing_user_stories_task(task_which_that_depends=task_to_create_db_strucure)
+task_to_plan_infra = devops_task(task_which_that_depends=task_to_assign_user_stories)
+
+# Create the crew with all agents and tasks
+crew = Crew(
+  agents=[
+    architect,
+    product_manager,
+    db_designer,
+    task_planner,
+    devops_advisor,
+  ],
+  tasks=[
+    task_to_create_system_arquitecture,
+    task_to_create_user_stories,
+    task_to_create_db_strucure,
+    task_to_assign_user_stories,
+    task_to_plan_infra,
+  ],
+  verbose=True  # Enable verbose output for better debugging
 )
 
-crew = Crew (
-  agents= [info_agent],
-  tasks=[task],
-)
-
+# Execute the crew and get the result
 result = crew.kickoff()
-print (result)
+
+# Print the result
+print(result)
