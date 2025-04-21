@@ -9,7 +9,7 @@ testAi :
 	curl http://localhost:11434/api/generate -d '{"model": "gemma:2b","prompt": "say yes"}'
 
 start :
-	poetry run python main.py
+	poetry run uvicorn main:app --reload
 
 down :
 	docker compose -f ./llama/docker-compose.yaml down
