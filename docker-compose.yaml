@@ -8,7 +8,7 @@ services:
     volumes:
       - ollama_data:/root/.ollama
     restart: unless-stopped
-    
+
   db:
     image: postgres
     volumes:
@@ -17,6 +17,8 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
 
 volumes:
   ollama_data:
