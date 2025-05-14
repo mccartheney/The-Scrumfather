@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 # necessary thing to construct token
 SECRET_KEY = "5ac33eeff0dbcdc4831e30cccc99bdf8a36ef79f5b9edefeff6ae61d700d8656"
 ALGORITHM = "HS256"
-expire_time_minutes = 1
+expire_time_minutes = 30
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # function to hash the password

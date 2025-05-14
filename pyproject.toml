@@ -18,7 +18,8 @@ dependencies = [
     "python-jose (>=3.4.0,<4.0.0)",
     "sqlalchemy (>=2.0.40,<3.0.0)",
     "psycopg2-binary (>=2.9.10,<3.0.0)",
-    "python-multipart (>=0.0.20,<0.0.21)"
+    "python-multipart (>=0.0.20,<0.0.21)",
+    "requests (>=2.32.3,<3.0.0)"
 ]
 
 [tool.poetry]
