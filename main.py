@@ -12,7 +12,7 @@ from typing import Annotated
 import json
 from datetime import datetime
 
-from src.utils.generate_plan import crew
+from src.utils.generate_plan import generate_crew_for_idea
 from src.models.projects import Create_project_request
 
 # Initialize FastAPI app
@@ -53,7 +53,8 @@ def create_project(
     # Run AI generation logic
     try:
         logger.info(f"Starting AI generation for project: {create_project_request.name}")
-        ai_results = crew.kickoff()
+        crew_instance = generate_crew_for_idea(create_project_request.idea)
+        ai_results = crew_instance.kickoff()
         if not ai_results:
             logger.error(f"AI generation failed - No results returned for project: {create_project_request.name}")
             raise ValueError("AI generation returned no results")
